@@ -1,0 +1,895 @@
+ private final View.OnClickListener handleLocalCall = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new Thread(() -> {
+
+                localIpAdd = ipAddress.getText().toString();
+                locUrlExt = ":7000/parcel_product/get_sing_prod/2/";
+                localUrl = "http://" + localIpAdd + locUrlExt;
+                String[][] myHeaders = {{"Content-Type", "application/json"}};
+
+                try {
+                    apiResult = apiCrudHelper.get(localUrl, myHeaders, getApplicationContext());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    if (apiResult != null) {
+                        JSONObject apiData = new JSONObject(apiResult);
+                        failBody = apiData.getString("body");
+                        data = apiData.getString("data");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(failBody.isEmpty() && data.isEmpty()) {
+                    prodNameStr = "error fetching prod name: " + apiResult;
+                    modPhotoUrl = photoUrl;
+                } else if (data.isEmpty()) {
+                    prodNameStr = "error fetching prod name: " + apiResult;
+                    modPhotoUrl = photoUrl;
+                } else {
+                    try {
+                        try {
+                            JSONObject dataCont = new JSONObject(data);
+                            prodNameStr = dataCont.getString("prod_name");
+                            prodPhotoStr = dataCont.getString("prod_photo");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (NullPointerException npe) {
+                        npe.printStackTrace();
+                    }
+
+                    try {
+                        modPhotoUrl = prodPhotoStr.replace("localhost", localIpAdd);
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+                fetchedFirstActVal = myPreference.getString("email", "n/a");
+
+                runOnUiThread(() -> {
+                    Picasso.get().load(modPhotoUrl).into(prodImage);
+                    prodName.setText(prodNameStr);
+                    firstActVal.setText(fetchedFirstActVal);
+                });
+            }).start();
+        }
+    };
+	
+	 String photoUrl = "https://picsum.photos/200/300";
+	 
+	    if (apiResult != null) {
+                    try {
+                            JSONObject apiData = new JSONObject(apiResult);
+                            data = apiData.getString("data");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                        try {
+                            try {
+                                JSONObject dataCont = new JSONObject(data);
+                                prodNameStr = dataCont.getString("prod_name");
+                                prodPhotoStr = dataCont.getString("prod_photo");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        } catch (NullPointerException npe) {
+                            npe.printStackTrace();
+                        }
+
+                        try {
+                            modPhotoUrl = prodPhotoStr.replace("localhost", localIpAdd);
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
+                }
+				
+				http://localhost:7000/media/product_images/laser_printer.jpg
+				
+				 if (userCategoryStr.equals("Customer")) {
+                    customerUrl = BASE_URL + "parcel_customer/customer_login_mobile/";
+
+                    JSONObject details = new JSONObject();
+                    try {
+                        details.put("email", userEmailStr);
+                        details.put("password", userPasswordStr);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    reqHeaders = new String[][]{{"Content-Type", "application/json"}};
+
+                    loginCred = details.toString();
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            responseBody = "";
+                            responseBody = apiCrudHelper.post(customerUrl, loginCred, reqHeaders, getApplicationContext());
+                            runOnUiThread(() -> {
+							
+							
+				
+				if (userCategoryStr.equals("Customer")) {
+                    customerUrl = BASE_URL + "parcel_customer/customer_login_mobile/";
+
+
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                multipartUtility = new MultipartUtility(customerUrl, "UTF-8");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            multipartUtility.addHeaderFields("Content-Type", "application/json");
+                            multipartUtility.addFormFields("email", userEmailStr);
+                            multipartUtility.addFormFields("password", userPasswordStr);
+                            try {
+                                multResponse = multipartUtility.finish();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            for(String line : multResponse) {
+                                responseBody = line;
+                            }
+                            runOnUiThread(() -> {
+							
+							
+							 String[][] reqBodyString = {{"first_name", first_name}, {"last_name", last_name}, {"bus_country", bus_country},
+                            {"bus_state", bus_state}, {"bus_street", bus_street}, {"bus_category", bus_category}, {"cac_reg_no", cac_reg_no},
+                            {"phone_no", phone_no}, {"nin", nin}, {"email", email}, {"password", password}, {"reg_date", reg_date}};
+                    
+							
+							 for (String[] field : reqBodyString) {
+                        if (field[0] != null && field[1] != null) {
+                            multipartUtility.addFormFields(field[0], field[1]);
+                        }
+                    }
+					
+					
+					 cartDBManager = new CartDBManager(ctx);
+            cartDBManager.open();
+            Product fetchedProduct = cartDBManager.getProduct(product);
+            if(fetchedProduct != null) {
+                addedQty.setText(String.valueOf(fetchedProduct.getAddedQty()));
+            } else {
+                addedQty.setText("0");
+            }
+            cartDBManager.close();
+			
+			
+			 @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+	
+	
+	
+            try {
+                cartDBManager.open();
+                Product fetchedProduct = cartDBManager.getProduct(product);
+                if(fetchedProduct != null) {
+                    addedQty.setText(String.valueOf(fetchedProduct.getAddedQty()));
+                } else {
+                    addedQty.setText("0");
+                }
+            } catch (SQLException sqe) {
+                Toast.makeText(ctx, "Error Creating the Database", Toast.LENGTH_LONG).show();
+                sqe.printStackTrace();
+            }
+			
+			if(oldVersion != newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " + tableName + ";");
+            onCreate(db);
+        }
+		
+		@Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+	
+	 public static synchronized CartSQLiteHelper getInstance(Context context) {
+        return new CartSQLiteHelper(context.getApplicationContext());
+    }
+	
+	Cursor cursor = database.rawQuery("select * from " + CartSQLiteHelper.tableName + " where " + CartSQLiteHelper.PRODUCT_ID + " = " + product.getProduct_id(), null);
+	
+	String sql = "DELETE * FROM " + CartSQLiteHelper.tableName + " WHERE " + CartSQLiteHelper.PRODUCT_ID + " = \"" + product.getProduct_id() + "\";";
+        database.rawQuery(sql,null);
+		
+		 database.delete(CartSQLiteHelper.tableName, CartSQLiteHelper.PRODUCT_ID + " = " + product.getProduct_id(),null);
+            database.setTransactionSuccessful();
+			
+			
+			 public static synchronized CartSQLiteHelper getInstance(Context context) {
+        return new CartSQLiteHelper(context.getApplicationContext());
+    }
+	
+	
+	 const handleFetchPhoto = () => {
+        let options = {
+            title: "Select Image",
+            customButtons: [
+                {
+                    name: 'customOptionKey',
+                    title: 'Choose file from Custom Option'
+                },
+            ],
+            storageOptions: {
+                skipBackup: true,
+                path: 'images',
+            },
+        };
+
+        ImagePicker.launchImageLibrary(options, (res) => {
+            console.log('Response: ', res);
+            if(res.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (res.customButton) {
+                console.log('User tapped custom button: ', customButton);
+                alert(res.customButton);
+            } else {
+                setDetails({...details, vend_photo: res.data});
+            }
+        });
+    }            
+	
+	{ uri: 'data:image/jpeg;base64,' + vend_photo }
+	
+	2022-08-25 23:27:27.318768
+	2022-08-28T17:27:45.483Z
+	
+	
+	JSONApiUtility jsonSaveOrder, jsonUpdateOrder, jsonSaveItem, jsonUpdateItem, jsonSavePayment, jsonUpdatePayment;
+
+	
+	
+	 String[][] reqHeader = {{"Content-Type", "application/json"}};
+
+        JSONObject reqBody = new JSONObject();
+        try {
+            reqBody.put("customer_id", customer_id);
+            reqBody.put("customer_name", customer_name);
+            reqBody.put("total_items", cartUtils.getTotalItems());
+            reqBody.put("total_price", cartUtils.getTotalAmount());
+            reqBody.put("shipping_method", shipping_method);
+            reqBody.put("zip_code", zip_code);
+            reqBody.put("is_customer", true);
+            reqBody.put("is_completed", false);
+            reqBody.put("created_at", "dummy_date");
+            reqBody.put("updated_at", "dummy_date");
+        } catch (JSONException jse) {
+            jse.printStackTrace();
+        }
+
+        new Thread(() -> {
+            apiResponse = apiCrudHelper.post(saveOrderUrl, reqBody.toString(), reqHeader, CustomerActivity.this);
+            if(apiResponse != null) {
+                runOnUiThread(() -> {
+                    if(!isFinishing()) {
+                        new AlertDialog.Builder(CustomerActivity.this)
+                                .setCancelable(true)
+                                .setTitle("Error!")
+                                .setMessage(apiResponse)
+                                .setPositiveButton("Ok", null)
+                                .setNegativeButton("Cancel", null)
+                                .create()
+                                .show();
+                    }
+                });
+
+            }
+        }).start();
+		
+		
+		
+		String[][] reqHeader = {{"Content-Type", "application/json"}};
+
+        JSONObject reqBody = new JSONObject();
+        try {
+            reqBody.put("customer_id", customer_id);
+            reqBody.put("customer_name", customer_name);
+            reqBody.put("total_items", cartUtils.getTotalItems());
+            reqBody.put("total_price", cartUtils.getTotalAmount());
+            reqBody.put("shipping_method", shipping_method);
+            reqBody.put("zip_code", zip_code);
+            reqBody.put("is_customer", true);
+            reqBody.put("is_completed", false);
+            reqBody.put("created_at", "dummy_date");
+            reqBody.put("updated_at", "dummy_date");
+        } catch (JSONException jse) {
+            jse.printStackTrace();
+        }
+
+        new Thread(() -> {
+            apiResponse = apiCrudHelper.post(saveOrderUrl, reqBody.toString(), reqHeader, CustomerActivity.this);
+            if(apiResponse != null) {
+                try {
+                    jsonResSaveOrder = new JSONObject(apiResponse);
+                    resStatus = jsonResSaveOrder.getString("status");
+                    resDataInt = jsonResSaveOrder.getInt("data");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (NullPointerException npe) {
+                    npe.printStackTrace();
+                }
+
+                if(resStatus.equals("success")) {
+                    order_id = resDataInt;
+                    myEditor = myPreference.edit();
+                    myEditor.putInt("curOrder", order_id);
+					myEditor.apply();
+
+                    try {
+                        cartItems = cartUtils.getAllFromCart();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (NullPointerException npe) {
+                        npe.printStackTrace();
+                    }
+
+                    for(Product item : cartItems) {
+                            saveItemUrl = "http://" + ipAddress + ":7000/parcel_order/order_item_save/" + order_id + "/" + item.getProduct_id() + "/";
+
+                            JSONObject itemReqBody = new JSONObject();
+
+                            try {
+                                itemReqBody.put("order_id", order_id);
+                                itemReqBody.put("product_id", item.getProduct_id());
+                                itemReqBody.put("product_name", item.getProd_name());
+                                itemReqBody.put("quantity", item.getAddedQty());
+                                itemReqBody.put("is_customer", true);
+                                itemReqBody.put("is_completed", false);
+                                itemReqBody.put("created_at", "dummy_date");
+                                itemReqBody.put("updated_at", "dummy_date");
+                            } catch (JSONException jse) {
+                                jse.printStackTrace();
+                            }
+
+                            apiResponse = apiCrudHelper.patch(saveItemUrl, itemReqBody.toString(), reqHeader, CustomerActivity.this);
+                            if(apiResponse != null) {
+                                try {
+                                    jsonResSaveItem = new JSONObject(apiResponse);
+                                    resStatus = jsonResSaveItem.getString("status");
+                                    resDataStr = jsonResSaveItem.getString("data");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                } catch (NullPointerException npe) {
+                                    npe.printStackTrace();
+                                }
+
+                                switch (resStatus) {
+                                    case "success":
+                                    case "error":
+                                    case "invalid":
+                                        runOnUiThread(() -> Toast.makeText(CustomerActivity.this, resDataStr, Toast.LENGTH_LONG).show());
+                                        break;
+                                    default:
+                                        runOnUiThread(() -> Toast.makeText(CustomerActivity.this, "An error occurred...", Toast.LENGTH_LONG).show());
+                                        break;
+                                }
+                            }
+                    } //End of saving items;
+
+                        payUrl = "http://" + ipAddress + ":7000/parcel_order/payment_save/" + order_id + "/";
+
+                        JSONObject payReqBody = new JSONObject();
+
+                        try {
+                            payReqBody.put("order_id", order_id);
+                            payReqBody.put("customer_id", customer_id);
+                            payReqBody.put("customer_name", customer_name);
+                            payReqBody.put("is_customer", true);
+                            payReqBody.put("amount", cartUtils.getTotalAmount());
+                            payReqBody.put("created_at", "dummy_date");
+                            payReqBody.put("updated_at", "dummy_date");
+                        } catch (JSONException jse) {
+                            jse.printStackTrace();
+                        }
+
+                        apiResponse = apiCrudHelper.post(payUrl, payReqBody.toString(), reqHeader, CustomerActivity.this);
+
+                        if(apiResponse != null) {
+                            try {
+                                jsonResSavePayment = new JSONObject(apiResponse);
+                                resStatus = jsonResSavePayment.getString("status");
+                                resDataStr = jsonResSavePayment.getString("data");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (NullPointerException npe) {
+                                npe.printStackTrace();
+                            }
+
+                            if(resStatus.equals("success")) {
+                                runOnUiThread(() -> Toast.makeText(CustomerActivity.this, resDataStr, Toast.LENGTH_LONG).show());
+                            }
+                        }//End of payment
+                }
+            }
+        }).start();// ApiCrudeHelperBlock
+
+		
+		
+		 ExecutorService executor = Executors.newCachedThreadPool();
+                    Runnable runnable = () -> {
+
+                        try {
+                            jsonSaveOrder = new JSONApiUtility(saveOrderUrl, "POST", "UTF-8");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            runOnUiThread(() -> Toast.makeText(CustomerActivity.this, "Error connecting with server...", Toast.LENGTH_LONG).show());
+                        } catch (NullPointerException npe) {
+                            npe.printStackTrace();
+                            runOnUiThread(() -> {
+                                if(!isFinishing()) {
+                                    new AlertDialog.Builder(CustomerActivity.this)
+                                            .setCancelable(true)
+                                            .setTitle("Error!")
+                                            .setMessage(npe.getMessage())
+                                            .setPositiveButton("Ok", null)
+                                            .setNegativeButton("Cancel", null)
+                                            .create()
+                                            .show();
+                                }
+                            });
+                        }
+
+                        try {
+                            jsonSaveOrder.addIntReqBody("customer_id", customer_id);
+                            jsonSaveOrder.addStrReqBody("customer_name", last_name + " " + first_name);
+                            jsonSaveOrder.addIntReqBody("total_items", cartUtils.getTotalItems());
+                            jsonSaveOrder.addIntReqBody("total_price", cartUtils.getTotalAmount());
+                            jsonSaveOrder.addStrReqBody("shipping_method", shipping_method);
+                            jsonSaveOrder.addStrReqBody("zip_code", zip_code);
+                            jsonSaveOrder.addBoolReqBody("is_customer", true);
+                            jsonSaveOrder.addBoolReqBody("is_completed", false);
+                            jsonSaveOrder.addStrReqBody("created_at", "dummy_date");
+                            jsonSaveOrder.addStrReqBody("updated_at", "dummy_date");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (NullPointerException npe) {
+                            npe.printStackTrace();
+                        }
+
+                        try {
+                            resBodyArr = jsonSaveOrder.finish();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (NullPointerException npe) {
+                            npe.printStackTrace();
+                        }
+
+                        if (resBodyArr != null) {
+                            for(String line : resBodyArr) {
+                                responseString = line;
+                            }
+                        }
+
+                        if(responseString != null) {
+                            try {
+                                jsonResSaveOrder = new JSONObject(responseString);
+                                resStatus = jsonResSaveOrder.getString("status");
+                                resDataInt = jsonResSaveOrder.getInt("data");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (NullPointerException npe) {
+                                npe.printStackTrace();
+                            }
+
+                            if(resStatus.equals("success")) {
+                                order_id = resDataInt;
+                                myEditor = myPreference.edit();
+                                myEditor.putInt("curOrder", order_id);
+                                myEditor.apply();
+
+                                try {
+                                    cartItems = cartUtils.getAllFromCart();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                } catch (NullPointerException npe) {
+                                    npe.printStackTrace();
+                                }
+
+                                for(Product item : cartItems) {
+
+                                        saveItemUrl = "http://" + ipAddress + ":7000/parcel_order/order_item_save/" + order_id + "/" + item.getProduct_id() + "/";
+                                        try {
+                                            jsonSaveItem = new JSONApiUtility(saveItemUrl, "PATCH", "UTF-8");
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                            runOnUiThread(() -> Toast.makeText(CustomerActivity.this, "Error connecting with server...", Toast.LENGTH_LONG).show());
+                                        } catch (NullPointerException npe) {
+                                            npe.printStackTrace();
+                                        }
+
+                                        try {
+                                            jsonSaveItem.addIntReqBody("order_id", order_id);
+                                            jsonSaveItem.addIntReqBody("product_id", item.getProduct_id());
+                                            jsonSaveItem.addStrReqBody("product_name", item.getProd_name());
+                                            jsonSaveItem.addIntReqBody("quantity", item.getAddedQty());
+                                            jsonSaveItem.addBoolReqBody("is_customer", true);
+                                            jsonSaveItem.addBoolReqBody("is_completed", false);
+                                            jsonSaveItem.addStrReqBody("created_at", "dummy_date");
+                                            jsonSaveItem.addStrReqBody("updated_at", "dummy_date");
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        } catch (NullPointerException npe) {
+                                            npe.printStackTrace();
+                                        }
+
+                                        try {
+                                            resBodyArr = jsonSaveItem.finish();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        } catch (NullPointerException npe) {
+                                            npe.printStackTrace();
+                                        }
+
+                                        if (resBodyArr != null) {
+                                            for(String line : resBodyArr) {
+                                                responseString = line;
+                                            }
+                                        }
+
+                                        if(responseString != null) {
+                                            try {
+                                                jsonResSaveItem = new JSONObject(responseString);
+                                                resStatus = jsonResSaveItem.getString("status");
+                                                resDataStr = jsonResSaveItem.getString("data");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            } catch (NullPointerException npe) {
+                                                npe.printStackTrace();
+                                            }
+
+                                            switch (resStatus) {
+                                                case "success":
+                                                case "error":
+                                                case "invalid":
+                                                    runOnUiThread(() -> Toast.makeText(CustomerActivity.this, resDataStr, Toast.LENGTH_LONG).show());
+                                                    break;
+                                                default:
+                                                    runOnUiThread(() -> Toast.makeText(CustomerActivity.this, "An error occurred...", Toast.LENGTH_LONG).show());
+                                                    break;
+                                            }
+                                        }
+                                } //End of saving items;
+
+
+                                    payUrl = "http://" + ipAddress + ":7000/parcel_order/payment_save/" + order_id + "/";
+                                    try {
+                                        jsonSavePayment = new JSONApiUtility(payUrl, "POST", "UTF-8");
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                        runOnUiThread(() -> Toast.makeText(CustomerActivity.this, "Error connecting with server...", Toast.LENGTH_LONG).show());
+                                    } catch (NullPointerException npe) {
+                                        npe.printStackTrace();
+                                    }
+
+                                    try {
+                                        jsonSavePayment.addIntReqBody("order_id", order_id);
+                                        jsonSavePayment.addIntReqBody("customer_id", customer_id);
+                                        jsonSavePayment.addStrReqBody("customer_name", last_name + " " + first_name);
+                                        jsonSavePayment.addBoolReqBody("is_customer", true);
+                                        jsonSavePayment.addIntReqBody("amount", cartUtils.getTotalAmount());
+                                        jsonSavePayment.addStrReqBody("created_at", "dummy_date");
+                                        jsonSavePayment.addStrReqBody("updated_at", "dummy_date");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    } catch (NullPointerException npe) {
+                                        npe.printStackTrace();
+                                    }
+
+                                    try {
+                                        resBodyArr = jsonSaveItem.finish();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    } catch (NullPointerException npe) {
+                                        npe.printStackTrace();
+                                    }
+
+                                    if (resBodyArr != null) {
+                                        for(String line : resBodyArr) {
+                                            responseString = line;
+                                        }
+                                    }
+
+                                    if(responseString != null) {
+                                        try {
+                                            jsonResSavePayment = new JSONObject(responseString);
+                                            resStatus = jsonResSavePayment.getString("status");
+                                            resDataStr = jsonResSavePayment.getString("data");
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        } catch (NullPointerException npe) {
+                                            npe.printStackTrace();
+                                        }
+
+                                        if(resStatus.equals("success")) {
+                                            runOnUiThread(() -> Toast.makeText(CustomerActivity.this, resDataStr, Toast.LENGTH_LONG).show());
+                                        }
+                                    }//End of payment
+                            }
+                        }// Main Thread end;
+                    };
+
+                    executor.execute(runnable);
+	
+	
+	
+	
+	String[][] reqHeader = {{"Content-Type", "application/json"}};
+
+        JSONObject reqBody = new JSONObject();
+        try {
+            reqBody.put("customer_id", customer_id);
+            reqBody.put("customer_name", customer_name);
+            reqBody.put("total_items", cartUtils.getTotalItems());
+            reqBody.put("total_price", cartUtils.getTotalAmount());
+            reqBody.put("shipping_method", shipping_method);
+            reqBody.put("zip_code", zip_code);
+            reqBody.put("is_customer", true);
+            reqBody.put("is_completed", false);
+            reqBody.put("created_at", "dummy_date");
+            reqBody.put("updated_at", "dummy_date");
+        } catch (JSONException jse) {
+            jse.printStackTrace();
+        }
+
+                    ExecutorService executor = Executors.newCachedThreadPool();
+                    Runnable runnable = () -> {
+
+                        apiResponse = apiCrudHelper.post(saveOrderUrl, reqBody.toString(), reqHeader, CustomerActivity.this);
+                        if(apiResponse != null) {
+                            try {
+                                jsonResSaveOrder = new JSONObject(apiResponse);
+                                resStatus = jsonResSaveOrder.getString("status");
+                                resDataInt = jsonResSaveOrder.getInt("data");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (NullPointerException npe) {
+                                npe.printStackTrace();
+                            }
+
+                            if(resStatus.equals("success")) {
+                                order_id = resDataInt;
+                                myEditor = myPreference.edit();
+                                myEditor.putInt("curOrder", order_id);
+                                myEditor.apply();
+                            }
+                        }
+                    };
+
+        Runnable runnablePayment = () -> {
+            if(order_id > 0) {
+                payUrl = "http://" + ipAddress + ":7000/parcel_order/payment_save/" + order_id + "/";
+
+                JSONObject payReqBody = new JSONObject();
+
+                try {
+                    payReqBody.put("order_id", order_id);
+                    payReqBody.put("customer_id", customer_id);
+                    payReqBody.put("customer_name", customer_name);
+                    payReqBody.put("is_customer", true);
+                    payReqBody.put("amount", cartUtils.getTotalAmount());
+                    payReqBody.put("created_at", "dummy_date");
+                    payReqBody.put("updated_at", "dummy_date");
+                } catch (JSONException jse) {
+                    jse.printStackTrace();
+                }
+
+                apiResponse = apiCrudHelper.post(payUrl, payReqBody.toString(), reqHeader, CustomerActivity.this);
+
+                if(apiResponse != null) {
+                    try {
+                        jsonResSavePayment = new JSONObject(apiResponse);
+                        resStatus = jsonResSavePayment.getString("status");
+                        resDataStr = jsonResSavePayment.getString("data");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (NullPointerException npe) {
+                        npe.printStackTrace();
+                    }
+
+                    if(resStatus.equals("success")) {
+                        runOnUiThread(() -> Toast.makeText(CustomerActivity.this, resDataStr, Toast.LENGTH_LONG).show());
+                    }
+                }//End of payment
+            }
+        };
+
+        executor.submit(runnable);
+        executor.submit(runnablePayment);
+
+                    ExecutorService saveItemExecutor = Executors.newCachedThreadPool();
+
+
+                        if(order_id > 0) {
+                            try {
+                                cartItems = cartUtils.getAllFromCart();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (NullPointerException npe) {
+                                npe.printStackTrace();
+                            }
+
+                            for(Product item : cartItems) {
+                                Runnable saveEach = () -> {
+                                    saveItemUrl = "http://" + ipAddress + ":7000/parcel_order/order_item_save_mobile/" + order_id + "/" + item.getProduct_id() + "/";
+
+                                    JSONObject itemReqBody = new JSONObject();
+
+                                    try {
+                                        itemReqBody.put("order_id", order_id);
+                                        itemReqBody.put("product_id", item.getProduct_id());
+                                        itemReqBody.put("product_name", item.getProd_name());
+                                        itemReqBody.put("quantity", item.getAddedQty());
+                                        itemReqBody.put("is_customer", true);
+                                        itemReqBody.put("is_completed", false);
+                                        itemReqBody.put("created_at", "dummy_date");
+                                        itemReqBody.put("updated_at", "dummy_date");
+                                    } catch (JSONException jse) {
+                                        jse.printStackTrace();
+                                    }
+
+                                    apiResponse = apiCrudHelper.put(saveItemUrl, itemReqBody.toString(), reqHeader, CustomerActivity.this);
+                                    if(apiResponse != null) {
+                                        try {
+                                            jsonResSaveItem = new JSONObject(apiResponse);
+                                            resStatus = jsonResSaveItem.getString("status");
+                                            resDataStr = jsonResSaveItem.getString("data");
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        } catch (NullPointerException npe) {
+                                            npe.printStackTrace();
+                                        }
+
+                                        switch (resStatus) {
+                                            case "success":
+                                            case "error":
+                                            case "invalid":
+                                                runOnUiThread(() -> Toast.makeText(CustomerActivity.this, resDataStr, Toast.LENGTH_LONG).show());
+                                                break;
+                                            default:
+                                                runOnUiThread(() -> Toast.makeText(CustomerActivity.this, "An error occurred...", Toast.LENGTH_LONG).show());
+                                                break;
+                                        }
+                                    }
+                                };
+
+                                saveItemExecutor.submit(saveEach);
+
+                            } //End of saving items;
+
+                        }
+						
+						
+						module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: ['module:metro-react-native-babel-preset'],
+    presets: ['react-native-reanimated/plugin'],
+  };
+}
+
+    "react-native-tab-view": "^3.1.1",
+	
+	
+	
+	 private final String PREF_FILE = BuildConfig.APPLICATION_ID.replace(".", "_");
+
+    SharedPreferences myPreference;
+
+    EditText mCardNumber;
+    EditText mCardExpiry;
+    EditText mCardCVV;
+    Button mPayButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
+        setContentView(R.layout.activity_payment);
+
+        Intent intent = getIntent();
+        String email = intent.getStringExtra("customerEmail");
+        int cAmount = intent.getIntExtra("chargeAmount", 0);
+
+        String toastMessage = "Customer E-Mail is " + email + " and charged amount is " + cAmount;
+
+        Toast.makeText(PaymentActivity.this, toastMessage, Toast.LENGTH_LONG).show();
+
+        myPreference = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+
+    }
+
+    private void initializePaystack() {
+        PaystackSdk.initialize(PaymentActivity.this);
+        PaystackSdk.setPublicKey("sk_test_a07a45baef63500fbf6ab432fffee907e2300e98");
+    }
+
+    private void initializeFormVariables() {
+        mCardNumber = null;
+        mCardExpiry = null;
+        mCardCVV = null;
+        mPayButton = null;
+
+        assert mCardExpiry != null;
+        mCardExpiry.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.toString().length() == 2 && !s.toString().contains("/")) {
+                    s.append("/");
+                }
+            }
+        });
+
+        mPayButton.setOnClickListener(v -> performCharge());
+    }
+
+    private void performCharge() {
+        Intent intent = getIntent();
+
+        String cardNumber = mCardNumber.getText().toString();
+        String cardExpiry = mCardExpiry.getText().toString();
+        String cvv = mCardCVV.getText().toString();
+
+        String[] cardExpiryArray = cardExpiry.split("/");
+        int expiryMonth = Integer.parseInt(cardExpiryArray[0]);
+        int expiryYear = Integer.parseInt(cardExpiryArray[1]);
+        int amount = intent.getIntExtra("chargeAmount", 0);
+        amount *= 100;
+
+        Card card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
+
+        Charge charge = new Charge();
+        charge.setAmount(amount);
+        charge.setEmail("example@gmail.com");
+        charge.setCard(card);
+
+        PaystackSdk.chargeCard(this, charge, new Paystack.TransactionCallback() {
+            @Override
+            public void onSuccess(Transaction transaction) {
+                handleOnSuccessCallback(transaction.getReference());
+            }
+
+            @Override
+            public void beforeValidate(Transaction transaction) {
+
+            }
+
+            @Override
+            public void onError(Throwable error, Transaction transaction) {
+
+            }
+        });
+    }
+
+    private void handleOnSuccessCallback(String trans_ref) {
+        //method body goes here...
+    }

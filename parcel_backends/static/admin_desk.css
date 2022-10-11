@@ -1,0 +1,148 @@
+@charset 'UTF-8';
+
+
+@media screen and (min-width: 414px) {
+    #admin-desk {
+        color: rgb(219, 33, 76);
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 1.5em;
+    }
+    
+    #admin-header {
+        border: solid rgb(219, 33, 76) 3px;
+        height: 120px;
+        width: 100%;
+        border-radius: 20px;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    #admin-welcome {
+        font-size: 1.3em;
+    }
+
+    .desk-btn {
+        height: 35px;
+        width: 65px;
+        font-size: 0.7em;
+        background-color: gray;
+        color: white;
+        text-align: center;
+        padding: 3px;
+    }
+
+    .desk-btn:hover {
+        background-color: rgb(219, 33, 76);
+        border: solid rgb(219, 33, 76) 2px;
+        font-weight: bold;
+        font-size: 0.8em;
+    
+    }
+    .desk-btn:focus-within {
+        background-color: rgb(219, 33, 76);
+        border: solid rgb(219, 33, 76) 2px;
+        font-weight: bold;
+        font-size: 0.8em;
+    }
+
+    #apiContent {
+        /* border: solid rgb(219, 33, 76) 5px; */
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        width: 70%;
+        overflow: hidden;
+        height: 100%;
+        /* float: left; */
+    }
+
+    #apiDetail {
+        /* border: solid rgb(219, 33, 76) 5px; */
+        width: 30%;
+        height: 100%;
+        /* float: right; */
+    }
+    .apiContainer {
+        /* display: inline-block;
+        box-sizing: border-box; */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+        width: 100%;
+        margin-top: 50px;
+        height: 100%;
+    }
+
+    .p-vend-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: skyblue;
+        color:rgb(219, 33, 76);
+        font-size: 1.1em;
+    }
+
+    .p-vend-item button {
+        height: 85%;
+        width: 75px;
+        font-size: 0.7em;
+        color: rgb(219, 33, 76);
+        padding: 2px;
+    }
+
+    .p-vend-item p {
+        font-size: 0.7em;
+    }
+
+    .tempVenChild {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        align-items: center;
+        height: 450px;
+        width: 400px;
+        border: solid skyblue 3px;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    .tempVenChild p:nth-child(1) {
+        text-align: center;
+        font-size: 1.3em;
+        color: rgb(219, 33, 76);
+        font-weight: bold;
+    }
+
+    .tempVenChild button {
+        background-color: skyblue;
+        color: rgb(219, 33, 76);
+    }
+
+    .venAction {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .img-size {
+        height: 100px;
+        width: 100px;
+    }
+
+    .apiHeading {
+        text-align: center;
+        text-transform: capitalize;
+        font-weight: bold;
+        color: rgb(219, 33, 76);
+    }
+
+    #error-alert-messages {
+        text-align: center;
+    }
+}

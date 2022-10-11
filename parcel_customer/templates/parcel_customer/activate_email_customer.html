@@ -1,0 +1,23 @@
+{% autoescape off %}
+<div style="border-bottom: solid rgb(219, 33, 76) 4px;height: 70px; width: 100%;">
+    <div style="height: 100px; width: 30px;" >
+        <img style="height: 40%; width: 250%;" alt="Company Logo" id="logo" src="http://localhost:7000/static/parcel_ico.png"/>
+    </div>
+    <div>
+        <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align:center; text-decoration: underline; 
+        margin-top: 5px; color:rgb(219, 33, 76); font-weight: bold;font-size: 1.7em;">Account Activation Link</p>
+    </div>
+</div>
+    <div style="display: flex; justify-content: center;">
+        <p style="font-family: Arial, Helvetica, sans-serif;font-size: 1.2em;margin-top: 80px; width: 70%; ;">
+            Dear {{user.first_name}}, <br/> <br/>
+            Please, click 
+           <a href="http://{{domain}}{% url 'activate_customer' uidb64=uid token=token %}">here</a> to activate your account.
+            If you did not initiate account registration, please ignore the link.
+        </p>
+    </div>
+<footer style="line-height: 3px;border: solid rgb(219, 33, 76); margin-top: 180px; background-color:  rgb(219, 33, 76); height: 70px; width: 100%;">
+    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align: center;font-weight: bold;color:white; font-size: 1.3em;">Powered by De-Extralucid Tech World &copy; 2022.</p>
+    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align: center; font-size: 1em; color: white;">All rights reserved.</p>
+ </footer>
+{% endautoescape %}

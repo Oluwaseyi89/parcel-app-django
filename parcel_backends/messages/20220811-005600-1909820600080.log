@@ -1,0 +1,118 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Testing template message
+From: we_care@parcelinc.org
+To: isenewotheo2015@gmail.com,  example@yahoo.com
+Date: Wed, 10 Aug 2022 23:56:00 -0000
+Message-ID: <166017576060.3380.8025611648718721196@DXLTECHWORLD>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="text/javascript"
+      src="/static/jquery-3.6.0.js"
+    ></script>
+    <link rel="stylesheet" href="/static/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/base.css" />
+    <link rel="stylesheet" href="/static/parcel_admin.css" />
+    <link rel="icon" type="image/x-icon" href="/static/parcel_ico.png" />
+    <title>PARCEL BACKENDS ADMIN</title>
+  </head>
+  <!-- The body section begins here -->
+  <body class="admin-body">
+    <div id="nav-bar">
+      <div class="brand">
+        <img
+          class="brand"
+          alt="Company Logo"
+          id="logo"
+          src="/static/parcel_ico.png"
+        />
+      </div>
+      <div class="bar-title">
+        <p>ADMIN PANEL</p>
+      </div>
+    </div>
+
+     
+<style>
+  #staff-info {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  .form-align {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #mail-portal {
+    text-align: center;
+    color: rgb(219, 33, 75);
+  }
+
+  #message-body {
+    height: 150px;
+  }
+</style>
+<div class="container">
+  <br />
+  <h3 id="mail-portal">Mailing Portal</h3>
+  <br />
+  <p id="staff-info">Welcome  </p>
+
+  <p></p>
+  <div>
+    <form method="post" action="/parcel_message/send_email_msg/" class="form">
+      
+      <div class="form-group form-align">
+        <label>Recipient(s):</label>
+        <textarea name="recipients" class="form-control"></textarea>
+      </div>
+      <div class="form-group form-align">
+        <label>Subject:</label>
+        <input name="subject" type="text" class="form-control" />
+      </div>
+      <div class="form-group form-align">
+        <label>HTML Body (Optional):</label>
+        <input
+          name="html_body"
+          placeholder="Enter the HTML file_name.extension"
+          type="text"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group form-align">
+        <label>Body:</label>
+        <textarea name="body" id="message-body" class="form-control"></textarea>
+      </div>
+      <div class="form-group form-align">
+        <label>Sender:</label>
+        <input name="sender" type="text" class="form-control" />
+      </div>
+      <div class="form-align">
+        <button type="submit" class="btn default-submit-btn">Send</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script></script>
+
+    <footer id="showFoot">
+      <p>Powered by De-Extralucid Tech World &copy; 2022.</p>
+      <p>All rights reserved.</p>
+    </footer>
+    <script
+      type="text/javascript"
+      src="/static/bootstrap.min.js"
+    ></script>
+    <script type="text/javascript" src="/static/admin.js"></script>
+  </body>
+</html>
+
+-------------------------------------------------------------------------------

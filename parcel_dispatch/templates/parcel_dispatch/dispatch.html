@@ -1,0 +1,130 @@
+{% extends 'parcel_backends/base.html' %} {% block content %} {% load static %}
+<h1>My Dispatches</h1>
+<div id="ready-orders" class="dispatch-container"></div>
+<div></div>
+<style>
+  .mbold {
+    font-weight: bold;
+  }
+
+  .size-img {
+    height: 100px;
+    weight: 100px;
+  }
+
+  .dispatch-container {
+    border: solid red 3px;
+  }
+
+  .item-container {
+    border: solid orange 2px;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .frag-container {
+    border: solid chartreuse 3px;
+  }
+
+  .item-package {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .ble-spread {
+    border: solid blue 1px;
+  }
+</style>
+<script>
+  function parseArray(sampleArray) {
+    let parsedResult = "";
+    for (let i = 0; i < sampleArray.length; i++) {
+      parsedResult +=
+        "<div class='item-container'>" +
+        `<img class='size-img' src=${sampleArray[i].prod_photo}/>` +
+        "<p>" +
+        sampleArray[i].product_name +
+        "</p>" +
+        "<p>" +
+        sampleArray[i].prod_model +
+        "</p>" +
+        "<p>" +
+        "Price: " +
+        "₦ " +
+        sampleArray[i].prod_price +
+        "</p>" +
+        "<p>" +
+        "Qty: " +
+        sampleArray[i].quantity +
+        "</p>" +
+        "<p>" +
+        "Total: " +
+        "₦ " +
+        sampleArray[i].total_amount +
+        "</p>" +
+        "</div>";
+    }
+
+    return parsedResult;
+  }
+
+  fetch("http://localhost:7000/parcel_dispatch/get_ready_orders/")
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      let ready_orders = document.getElementById("ready-orders");
+      console.log(data);
+      data.dispatch_array.forEach((customer) => {
+        ready_orders.innerHTML +=
+          "<div class='frag-container'>" +
+          "<tr class='ble-spread'>" +
+          "<td>" +
+          "Order Id: " +
+          `${customer.order_id}` +
+          "</td>" +
+          "<td>" +
+          "Customer Id: " +
+          `${customer.customer_id}` +
+          "</td>" +
+          "<td>" +
+          "Customer Name: " +
+          `${customer.customer_name}` +
+          "</td>" +
+          "</tr>" +
+          "<p>" +
+          "Customer Address: " +
+          `${customer.address}` +
+          "</p>" +
+          "<p>" +
+          "Customer E-mail: " +
+          `${customer.email}` +
+          "</p>" +
+          `<label> Delivered   <input type='checkbox' checked=${customer.is_delivered} /></label>` +
+          "<p>" +
+          "Total Items: " +
+          `${customer.total_items}` +
+          "</p>" +
+          "<p>" +
+          "Total Price: " +
+          "₦ " +
+          `${customer.total_price}` +
+          "</p>" +
+          "<p>" +
+          "Customer Phone: " +
+          `${customer.phone_no}` +
+          "</p>" +
+          "<p>" +
+          "Shipping Method: " +
+          `${customer.shipping_method}` +
+          "</p>" +
+          "<div class='item-package'>" +
+          `${parseArray(customer.products)}` +
+          "</div>" +
+          "</div>";
+      });
+    })
+    .catch((err) => console.log(err));
+</script>
+{% endblock %}

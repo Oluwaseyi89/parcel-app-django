@@ -1,0 +1,88 @@
+@charset 'UTF-8';
+
+
+@media screen and (min-width: 414px) {
+    form {
+        text-align: center;
+        padding-top: 30px;
+    }
+
+    legend {
+        text-transform: uppercase;
+        font-size: 1.3em;
+        color: rgb(219, 33, 76);
+    }
+
+   .horizontal-form {
+       display: flex;
+       flex-direction: column;
+       text-align: center;
+   }
+
+   .default-submit-btn {
+    background-color: rgb(219, 33, 76);
+    color: white;
+}
+
+   #super_alert {
+       margin-top: 30px;
+       padding-top: 20px;
+       height: 55px;
+       /* display: none; */
+   }
+
+   #super_alert p {
+       text-align: center;
+       text-transform: uppercase;
+       font-size: 0.85em;
+   }
+
+   #staff_alert {
+       margin-top: 30px;
+       padding-top: 20px;
+       height: 55px;
+       /* display: none; */
+   }
+
+   #staff_alert p {
+       text-align: center;
+       text-transform: uppercase;
+       font-size: 0.85em;
+   }
+
+   #pass_alert {
+       margin-top: 30px;
+       padding-top: 20px;
+       height: 55px;
+       /* display: none; */
+   }
+
+   #pass_alert p {
+       text-align: center;
+       text-transform: uppercase;
+       font-size: 0.85em;
+   }
+
+   #blank_alert {
+       margin-top: 30px;
+       padding-top: 20px;
+       height: 55px;
+       /* display: none; */
+   }
+
+   #blank_alert p {
+       text-align: center;
+       text-transform: uppercase;
+       font-size: 0.85em;
+   }
+   #blank_alert p:nth-child(2) {
+       text-align: center;
+       text-transform: uppercase;
+       font-size: 0.85em;
+   }
+
+   /* .horizontal-form div {
+       display: flex;
+       flex-direction: row;
+   } */
+}

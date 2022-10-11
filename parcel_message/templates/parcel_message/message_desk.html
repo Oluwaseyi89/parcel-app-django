@@ -1,0 +1,142 @@
+{% extends 'parcel_backends/base.html' %} {% block content %} {% load static %}
+<style>
+  #staff-info {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  .form-align {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #mail-portal {
+    text-align: center;
+    color: rgb(219, 33, 75);
+  }
+
+  #message-body {
+    height: 150px;
+  }
+
+  .btn-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+</style>
+<div class="container">
+  <br />
+  <h3 id="mail-portal">Mailing Portal</h3>
+  <input type="hidden" value="{{last_name}}" id="l-name" />
+  <input type="hidden" value="{{first_name}}" id="f-name" />
+  <br />
+  <p id="staff-info">Welcome {{last_name}} {{first_name}}</p>
+  <div class="btn-right">
+    <button id="logout" class="btn default-submit-btn">Logout</button>
+  </div>
+  <br />
+  <div
+    id="alert_container"
+    class="alert alert-success alert-dismissible"
+    role="alert"
+  >
+    <p id="success" style="text-align: center">{{detail}}</p>
+    <button role="alert" type="button" class="close" data-dismiss="alert">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div>
+    <div
+      id="error_container"
+      class="alert alert-danger alert-dismissible"
+      role="alert"
+    >
+      <p id="error" style="text-align: center">{{error}}</p>
+      <button role="alert" type="button" class="close" data-dismiss="alert">
+        <span>&times;</span>
+      </button>
+    </div>
+    <div>
+      <form method="post" action="/parcel_message/send_email_msg/" class="form">
+        {% csrf_token %}
+        <div class="form-group form-align">
+          <label>Recipient(s):</label>
+          <textarea name="recipients" class="form-control"></textarea>
+        </div>
+        <div class="form-group form-align">
+          <label>Subject:</label>
+          <input name="subject" type="text" class="form-control" />
+        </div>
+        <div id="html-body" class="form-group form-align">
+          <label>HTML Body (Optional):</label>
+          <input
+            id="html-content"
+            name="html_body"
+            placeholder="Enter the HTML file_name.extension"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div id="email-body" class="form-group form-align">
+          <label>Body:</label>
+          <textarea
+            name="body"
+            id="message-body"
+            class="form-control"
+          ></textarea>
+        </div>
+        <div class="form-group form-align">
+          <label>Sender:</label>
+          <input name="sender" type="text" class="form-control" />
+        </div>
+        <div class="form-align">
+          <button type="submit" class="btn default-submit-btn">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    let f_name = $("#f-name").val();
+    let l_name = $("#l-name").val();
+    let log_staff = f_name + " " + l_name;
+    window.addEventListener("load", () => {
+      localStorage.setItem("log_staff", log_staff);
+    });
+    if (!$("#success").html()) {
+      $("#alert_container").hide();
+    } else {
+      $("#alert_container").show();
+    }
+    if (!$("#error").html()) {
+      $("#error_container").hide();
+    } else {
+      $("#error_container").show();
+    }
+
+    $("#html-content").on("change", () => {
+      $("#email-body").hide();
+      auto_log_out();
+    });
+
+    $("#message-body").on("change", () => {
+      $("#html-body").hide();
+      auto_log_out();
+    });
+
+    function auto_log_out() {
+      let check_session = localStorage.getItem("log_staff") || null;
+
+      if (!check_session) {
+        window.location = "http://localhost:7000/parcel_message/message/";
+      }
+    }
+
+    $("#logout").on("click", () => {
+      localStorage.removeItem("log_staff");
+      window.location = "http://localhost:7000/parcel_message/message/";
+    });
+  </script>
+  {% endblock %}
+</div>

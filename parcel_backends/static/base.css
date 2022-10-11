@@ -1,0 +1,88 @@
+@charset 'UTF-8';
+
+
+@media screen and (min-width: 414px) {
+    .brand {
+        width: 100px;
+        height: 30px;
+    }
+
+    .admin-body {
+        max-width: 100%;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding-top: 20px;
+    }
+
+    #nav-bar {
+        border-bottom: solid rgb(219, 33, 76) 2px;
+        height: 70px;
+        max-width: 100%;
+    }
+
+    .bar-title p {
+        text-align: center;
+        color:rgb(219, 33, 76);
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+
+    footer {
+        border: solid rgb(219, 33, 76) 2px;
+        height: 70px;
+        margin-top: 400px;
+        background-color: rgb(219, 33, 76);
+        padding: 0px;
+        /* display: none; */
+    }
+
+    footer p:nth-child(1) {
+        /* border: solid green 2px; */
+        text-align: center;
+        font-weight: bold;
+        color: white;
+        font-size: 1em;
+    }
+
+    footer p:nth-child(2) {
+        /* border: solid orange 2px; */
+        text-align: center;
+        color: white;
+        font-size: 0.7em;
+    }
+
+    .photo-input-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 160px;
+        width: 100%;
+    }
+
+    .photo-label {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .photo-img {
+        height: 120px;
+        width: 120px;
+    }
+
+    #staff-img {
+        height: 100%;
+        width: 100%;
+    }
+
+    #admin-img {
+        height: 100px;
+        width: 100px;
+    }
+
+    .admin-identity {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

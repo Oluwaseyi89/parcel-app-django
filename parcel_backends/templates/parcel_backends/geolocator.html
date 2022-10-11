@@ -1,0 +1,28 @@
+
+   {% extends 'parcel_backends/base.html' %}
+    {% block content %}
+        {% load static %}
+        {% load crispy_forms_tags %}
+           <div class="container">
+               <h3 style="text-align:center">Geolocation API</h3>
+               <hr/>
+               <br/>
+               <div style="margin-left:12.5%">
+                   {{map|safe}}
+               </div>
+               <hr/>
+               <div>
+                   Distance is {{distance}} Km
+               </div>
+               <form action="" method="post" autocomplete="off">
+                   {% csrf_token %}
+                   {{ form|crispy }}
+                   <br/>
+                   <button type="submit" class="btn btn-primary">Confirm</button>
+               </form>
+               <br/>
+               This product includes GeoLite2 data created by MaxMind, available from
+               <a href="https://www.maxmind.com">https://www.maxmind.com</a>
+
+           </div>
+   {% endblock %}

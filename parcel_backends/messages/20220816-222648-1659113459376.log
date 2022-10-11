@@ -1,0 +1,33 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Activate your account
+From: webmaster@localhost
+To: adie@yahoo.com
+Date: Tue, 16 Aug 2022 21:26:48 -0000
+Message-ID: <166068520856.3448.13586944997682303502@DXLTECHWORLD>
+
+
+<div style="border-bottom: solid rgb(219, 33, 76) 4px;height: 70px; width: 100%;">
+    <div style="height: 100px; width: 30px;" >
+        <img style="height: 40%; width: 250%;" alt="Company Logo" id="logo" src="http://localhost:7000/static/parcel_ico.png"/>
+    </div>
+    <div>
+        <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align:center; text-decoration: underline; 
+        margin-top: 5px; color:rgb(219, 33, 76); font-weight: bold;font-size: 1.7em;">Account Activation Link</p>
+    </div>
+</div>
+    <div style="display: flex; justify-content: center;">
+        <p style="font-family: Arial, Helvetica, sans-serif;font-size: 1.2em;margin-top: 80px; width: 70%; ;">
+            Dear Edward, <br/> <br/>
+            Please, click 
+           <a href="http://192.168.42.236:7000/parcel_backends/activate_vendor/NzI/ba9t0o-ebaa0f74265cae5d7c2c0f9315dbb66e">here</a> to activate your account.
+            If you did not initiate account registration, please ignore the link.
+        </p>
+    </div>
+<footer style="line-height: 3px;border: solid rgb(219, 33, 76); margin-top: 180px; background-color:  rgb(219, 33, 76); height: 70px; width: 100%;">
+    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align: center;font-weight: bold;color:white; font-size: 1.3em;">Powered by De-Extralucid Tech World &copy; 2022.</p>
+    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align: center; font-size: 1em; color: white;">All rights reserved.</p>
+ </footer>
+
+-------------------------------------------------------------------------------

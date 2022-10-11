@@ -1,0 +1,33 @@
+
+   {% extends 'parcel_backends/base.html' %}
+    {% block content %}
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'parcel_admin.css' %}" />
+            <div id="super_alert" class="alert alert-danger alert-dismissible" role="alert">
+                <p id="alert_mess">{{mess}}</p> 
+                <button role="alert" type="button"  class="close" data-dismiss="alert"><span>&times;</span></button>
+            </div>
+            <form class="container" method="POST" action="/parcel_backends/super_admin/">
+                {% csrf_token %}
+                <legend>Super Admin Login</legend> <br/>
+                <div class="horizontal-form">
+                    <div class="form-group">
+                        <input name="email" placeholder="Enter Email" for="email" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input name="password" placeholder="Enter Password" for="password" type="password" class="form-control"/>
+                    </div>
+                    <input type="submit" class="btn default-submit-btn" value="Login"/> <hr/>
+                </div>
+            </form>
+
+   <script>
+       if (!$('#alert_mess').html()) {
+           $('#super_alert').hide();
+       } else {
+           $('#super_alert').show();
+       }
+
+   </script>
+
+{% endblock %}
