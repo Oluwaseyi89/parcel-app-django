@@ -1,6 +1,6 @@
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
-from .models import TempVendor, TempCourier, Vendor, Courier, VendorBankDetail, CourierBankDetail
+from .models import TempVendor, TempCourier, Vendor, Courier, VendorBankDetail, CourierBankDetail, CustomerComplaint
 
 
 class TempVendorSerializer(serializers.ModelSerializer):
@@ -185,3 +185,17 @@ class CourierBankDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourierBankDetail
         fields = '__all__'
+
+
+class CustomerComplaintSerializer(serializers.ModelSerializer):
+    customer_email = serializers.CharField(max_length=70)
+    complaint_subject = serializers.CharField(max_length=125)
+    courier_involved = serializers.CharField(max_length=125)
+    complaint_detail = serializers.CharField(max_length=1000)
+    is_resolved = serializers.BooleanField()
+    is_satisfied = serializers.BooleanField()
+
+    class Meta:
+        model = CustomerComplaint
+        fields = '__all__'
+

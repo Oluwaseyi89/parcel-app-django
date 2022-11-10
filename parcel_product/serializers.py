@@ -55,3 +55,6 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ["prod_price", "prod_qty", "prod_disc", "updated_at"]
+
+
+

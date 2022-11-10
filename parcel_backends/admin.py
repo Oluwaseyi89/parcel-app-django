@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Staff, TempVendor, TempCourier, Vendor, Courier, VendorBankDetail, CourierBankDetail, \
-    Measurement
+    Measurement, CustomerComplaint
 
 from django.apps import apps
 
@@ -14,6 +14,7 @@ admin.site.register(Courier)
 admin.site.register(VendorBankDetail)
 admin.site.register(CourierBankDetail)
 admin.site.register(Measurement)
+admin.site.register(CustomerComplaint)
 
 # models = apps.get_models()
 #
