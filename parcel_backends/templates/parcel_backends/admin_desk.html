@@ -1,48 +1,47 @@
-
-   {% extends 'parcel_backends/base.html' %}
-    {% block content %}
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'admin_desk.css' %}" />
-        <h1 id="admin-desk">Admin Office Desk</h1>
-        <div id="admin-header">
-            <button id="getPVend" class="btn desk-btn">P.Vendors</button>
-            <button id="vendors" class="btn desk-btn">Vendors</button>
-            <button id="getCourier" class="btn desk-btn">P.Couriers</button>
-            <button id="couriers" class="btn desk-btn">Couriers</button>
-            <button id="getProd" class="btn desk-btn">P.Products</button>
-            <button id="products" class="btn desk-btn">Products</button>
-            <button class="btn desk-btn">Customers</button>
-            <button class="btn desk-btn">Unassigned</button>
-            <button class="btn desk-btn">Unassigned</button>
-            <button id="reset" class="btn desk-btn">Reset</button>
-        </div>
-        <br/>
-        <div id="admin-identity" class="admin-identity">
-            <h1 id="admin-welcome">Welcome {{last_name}} {{first_name}}</h1>
-            <input type="hidden" id="hide" value="{{id}}" />
-            <img src='../../media/{{photo}}' class="img-thumbnail" id="admin-img" alt="staff-avatar"/>
-            <!-- <img src='http://localhost:7000/media/staff-photo/Ephraim_psp_001.jpg' id="admin-img" alt="staff-avatar"/> -->
-        </div>
-        <div id="alert-messages">
-        </div>
-        <div class="apiContainer">
-            <div class="container" id="apiContent">
-
-            </div>
-            <div class="container" id="apiDetail"></div>
-        </div>
+{% extends 'parcel_backends/base.html' %} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'admin_desk.css' %}" />
+<h1 id="admin-desk">Admin Office Desk</h1>
+<div id="admin-header">
+  <button id="getPVend" class="btn desk-btn">P.Vendors</button>
+  <button id="vendors" class="btn desk-btn">Vendors</button>
+  <button id="getCourier" class="btn desk-btn">P.Couriers</button>
+  <button id="couriers" class="btn desk-btn">Couriers</button>
+  <button id="getProd" class="btn desk-btn">P.Products</button>
+  <button id="products" class="btn desk-btn">Products</button>
+  <button class="btn desk-btn">Customers</button>
+  <button id="complaints" class="btn desk-btn">Complaints</button>
+  <button class="btn desk-btn">Unassigned</button>
+  <button id="reset" class="btn desk-btn">Reset</button>
+</div>
+<br />
+<div id="admin-identity" class="admin-identity">
+  <h1 id="admin-welcome">Welcome {{last_name}} {{first_name}}</h1>
+  <input type="hidden" id="hide" value="{{id}}" />
+  <img
+    src="../../media/{{photo}}"
+    class="img-thumbnail"
+    id="admin-img"
+    alt="staff-avatar"
+  />
+  <!-- <img src='http://localhost:7000/media/staff-photo/Ephraim_psp_001.jpg' id="admin-img" alt="staff-avatar"/> -->
+</div>
+<div id="alert-messages"></div>
+<div class="apiContainer">
+  <div class="container" id="apiContent"></div>
+  <div class="container" id="apiDetail"></div>
+</div>
 <script>
-    document.title = "Admin Office Desk";
-    // let adm = document.getElementById('admin-welcome');
-    // let first_name = adm.innerHTML.split(" ").pop();
-    // let last_name = adm.innerHTML.split(" ").slice(1, -1);
-    // // let staff = adm.innerHTML.split(" ").pop();
-    // // console.log(staff);
-    // console.log(last_name[0] + " " + first_name);
-    // // console.log(typeof last_name[0]);
-    // // let conten = document.getElementById('admin-identity');
-    // // console.log(conten.innerHTML);
-    // let hide = $('#hide').val();
-    // console.log(hide);
+  document.title = "Admin Office Desk";
+  // let adm = document.getElementById('admin-welcome');
+  // let first_name = adm.innerHTML.split(" ").pop();
+  // let last_name = adm.innerHTML.split(" ").slice(1, -1);
+  // // let staff = adm.innerHTML.split(" ").pop();
+  // // console.log(staff);
+  // console.log(last_name[0] + " " + first_name);
+  // // console.log(typeof last_name[0]);
+  // // let conten = document.getElementById('admin-identity');
+  // // console.log(conten.innerHTML);
+  // let hide = $('#hide').val();
+  // console.log(hide);
 </script>
 {% endblock %}

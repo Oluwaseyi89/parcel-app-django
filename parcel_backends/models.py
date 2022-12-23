@@ -140,6 +140,8 @@ class CustomerComplaint(models.Model):
     complaint_detail = models.TextField(max_length=1000)
     is_resolved = models.BooleanField()
     is_satisfied = models.BooleanField()
+    created_at = models.CharField(default="dummy_date", max_length=50)
+    updated_at = models.CharField(default="dummy_date", max_length=50)
 
     def __str__(self):
         return self.complaint_subject

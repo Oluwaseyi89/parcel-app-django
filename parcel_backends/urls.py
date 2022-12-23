@@ -4,10 +4,12 @@ from django.conf.urls import url
 from django.views.decorators.csrf import csrf_exempt
 from .views import home, base, super_admin, reg_staff, staff_login, desk_login, staff_reg_page, \
     TempVendorViews, TempCourierViews, GetTempVendorViews, GetTempCourierViews, VendorViews, DelTempVendorViews, \
-    CourierViews, DelTempCourierViews, GetCourierViews, GetVendorViews, VendorLoginViews, CourierLoginViews, email_msg_view,\
-    activate_vendor, activate_courier, VendorResetViews, vendor_reset, VendorSaveResetViews, CourierResetViews, \
-    CourierSaveResetViews, courier_reset, VendorBankDetailViews, VendorBankUpdateViews, GetVendorByEmailViews, \
-    CourierBankDetailViews, CourierBankUpdateViews, calculate_distance_view, desk_login_external
+    CourierViews, DelTempCourierViews, GetCourierViews, GetVendorViews, VendorLoginViews, CourierLoginViews, \
+    email_msg_view, activate_vendor, activate_courier, VendorResetViews, vendor_reset, VendorSaveResetViews, \
+    CourierResetViews, CourierSaveResetViews, courier_reset, VendorBankDetailViews, VendorBankUpdateViews, \
+    GetVendorByEmailViews, CourierBankDetailViews, CourierBankUpdateViews, calculate_distance_view, \
+    desk_login_external, CustomerComplaintFormViews, GetDistinctCustomerComplaintViews, CustomerComplaintUpdateViews, \
+    GetAllCustomerComplaintsViews, GetDistinctVendorBankViews
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,7 +25,9 @@ urlpatterns = [
     path('staff_reg_page/', staff_reg_page, name="staff_reg_page"),
     path('update_vend_bank/<str:vendor_email>', VendorBankUpdateViews.as_view(), name="update_vend_bank"),
     path('update_cour_bank/<str:courier_email>', CourierBankUpdateViews.as_view(), name="update_cour_bank"),
+    path('update_complain/<int:complaint_id>/', CustomerComplaintUpdateViews.as_view(), name="update_complain"),
     path('save_vend_bank/', VendorBankDetailViews.as_view(), name="save_vend_bank"),
+    path('customer_complain/', CustomerComplaintFormViews.as_view(), name="customer_complain"),
     path('save_cour_bank/', CourierBankDetailViews.as_view(), name="save_cour_bank"),
     path('reg_temp_ven/', TempVendorViews.as_view(), name="reg_temp_ven"),
     path('reg_temp_ven_mobile/', csrf_exempt(TempVendorViews.as_view()), name="reg_temp_ven_mobile"),
@@ -34,6 +38,11 @@ urlpatterns = [
     path('get_ven/', GetVendorViews.as_view(), name="get_ven"),
     path('get_ven_email/<str:email>/', GetVendorByEmailViews.as_view(), name="get_ven_email"),
     path('get_cour/', GetCourierViews.as_view(), name="get_cour"),
+    path('get_all_complain/', GetAllCustomerComplaintsViews.as_view(), name="get_all_complain"),
+    path('get_dist_complain/<str:customer_email>/', GetDistinctCustomerComplaintViews.as_view(),
+         name="get_dist_complain"),
+    path('get_dist_vend_bank/<str:vendor_email>/', GetDistinctVendorBankViews.as_view(),
+         name="get_dist_vend_bank"),
     path('appr_vendor/', VendorViews.as_view(), name="appr_vendor"),
     path('del_temp_vendor/<int:id>/', DelTempVendorViews.as_view(), name="del_temp_vendor"),
     path('appr_courier/', CourierViews.as_view(), name="appr_courier"),

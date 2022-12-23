@@ -194,6 +194,8 @@ class CustomerComplaintSerializer(serializers.ModelSerializer):
     complaint_detail = serializers.CharField(max_length=1000)
     is_resolved = serializers.BooleanField()
     is_satisfied = serializers.BooleanField()
+    created_at = serializers.CharField(max_length=50)
+    updated_at = serializers.CharField(max_length=50)
 
     class Meta:
         model = CustomerComplaint

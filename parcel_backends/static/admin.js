@@ -43,6 +43,7 @@ let couriers = document.getElementById('couriers');
 let vendors = document.getElementById('vendors');
 let products = document.getElementById('products');
 const alt_msg = document.getElementById('alert-messages');
+let complaints = document.getElementById('complaints');
 
 
 if (!apiDetail.innerHTML) {
@@ -68,6 +69,15 @@ apiDetail.addEventListener('change', ()=>{
     // }
     console.log('A change occured');
 });
+
+
+
+function customAlertHandler (typ, msg) {
+    alt_msg.innerHTML =  `<div  class="alert ${typ} alert-dismissible" role="alert">`
+                    + '<p id="error-alert-messages">' + msg + '</p>' +
+                        '<button class="close" role="alert" data-dismiss="alert">' + '<span>' + '&times;' + '</span>' + '</button>'
+                    + '</div>';
+}
 
 /**
 *This function handles the actions on the potential vendor
@@ -148,24 +158,15 @@ const tempVendorManager = (id, data) => {
                     let apprVendor = useFetch('/parcel_backends/appr_vendor/', 'POST', vendBody);
                     apprVendor.then((res)=> {
                         if (res.status === "error") {
-                            alt_msg.innerHTML =  '<div  class="alert alert-danger alert-dismissible" role="alert">'
-                    + '<p id="error-alert-messages">' + res.data + '</p>' +
-                        '<button class="close" role="alert" data-dismiss="alert">' + '<span>' + '&times;' + '</span>' + '</button>'
-                    + '</div>';
+                            customAlertHandler("alert-danger", res.data);
             } else if (res.status === "success") {
-                alt_msg.innerHTML =  '<div  class="alert alert-success alert-dismissible" role="alert">'
-                + '<p id="error-alert-messages">' + res.data + '</p>' +
-                    '<button class="close" role="alert" data-dismiss="alert">' + '<span>' + '&times;' + '</span>' + '</button>'
-                + '</div>';
+                customAlertHandler("alert-success", res.data);
                 useFetch(`/parcel_backends/del_temp_vendor/${data.id}/`, 'DELETE').then((res) => console.log(res.data)).
                 catch((err) => console.log(err));
                 console.log(data.email);
 
                 } else {
-                    alt_msg.innerHTML =  '<div  class="alert alert-danger alert-dismissible" role="alert">'
-                    + '<p id="error-alert-messages">' + "An error occured, clear cookies to resolve" + '</p>' +
-                        '<button class="close" role="alert" data-dismiss="alert">' + '<span>' + '&times;' + '</span>' + '</button>'
-                    + '</div>';
+                    customAlertHandler("alert-danger", "An error occured! Clear cookies to resolve");
                 }
             }).catch((err)=>console.log(err));
                     // console.log(data.nin);
@@ -260,15 +261,9 @@ const tempCourierManager = (id, data) => {
                     let apprCourier = useFetch('/parcel_backends/appr_courier/', 'POST', courBody);
                     apprCourier.then((res)=> {
                         if (res.status === "error") {
-                            alt_msg.innerHTML =  '<div  class="alert alert-danger alert-dismissible" role="alert">'
-                    + '<p id="error-alert-messages">' + res.data + '</p>' +
-                        '<button class="close" role="alert" data-dismiss="alert">' + '<span>' + '&times;' + '</span>' + '</button>'
-                    + '</div>';
+                            customAlertHandler("alert-danger", res.data);
             } else if (res.status === "success") {
-                alt_msg.innerHTML =  '<div  class="alert alert-success alert-dismissible" role="alert">'
-                + '<p id="error-alert-messages">' + res.data + '</p>' +
-                    '<button class="close" role="alert" data-dismiss="alert">' + '<span>' + '&times;' + '</span>' + '</button>'
-                + '</div>';
+                customAlertHandler("alert-success", res.data);
                 useFetch(`/parcel_backends/del_temp_courier/${data.id}/`, 'DELETE').then((res) => console.log(res.data)).
                 catch((err) => console.log(err));
                 console.log(data.email);
@@ -373,24 +368,15 @@ const tempProductManager = (id, data) => {
                     let apprProduct = useFetch('/parcel_product/appr_product/', 'POST', prodBody);
                     apprProduct.then((res)=> {
                         if (res.status === "error") {
-                            alt_msg.innerHTML =  '<div  class="alert alert-danger alert-dismissible" role="alert">'
-                    + '<p id="error-alert-messages">' + res.data + '</p>' +
-                        '<button class="close" role="alert" data-dismiss="alert">' + '<span>' + '&times;' + '</span>' + '</button>'
-                    + '</div>';
+                            customAlertHandler("alert-danger", res.data)
             } else if (res.status === "success") {
-                alt_msg.innerHTML =  '<div  class="alert alert-success alert-dismissible" role="alert">'
-                + '<p id="error-alert-messages">' + res.data + '</p>' +
-                    '<button class="close" role="alert" data-dismiss="alert">' + '<span>' + '&times;' + '</span>' + '</button>'
-                + '</div>';
+                customAlertHandler("alert-success", res.data);
                 useFetch(`/parcel_product/del_temp_product/${data.id}/`, 'DELETE').then((res) => console.log(res.data)).
                 catch((err) => console.log(err));
                 console.log(data.email);
 
                 } else {
-                    alt_msg.innerHTML =  '<div  class="alert alert-danger alert-dismissible" role="alert">'
-                    + '<p id="error-alert-messages">' + "An error occured! Clear cookies to resolve" + '</p>' +
-                        '<button class="close" role="alert" data-dismiss="alert">' + '<span>' + '&times;' + '</span>' + '</button>'
-                    + '</div>';   
+                    customAlertHandler("alert-danger", "An error occured! Clear cookies to resolve");   
                 }
             }).catch((err)=>console.log(err));
                     
@@ -595,6 +581,67 @@ const courierManager = (id, data) => {
 
 
 
+//Complaint Manager Starts here
+
+const complaintManager = (id, data) => {
+
+    let curCour = document.getElementById(id);
+    curCour.addEventListener('click', () => {
+        apiContent.style.width = "50%";
+        apiDetail.style.width = "50%";
+        if(window.innerWidth <= 414) {
+            apiContent.style.width = "0%";
+            apiDetail.style.width = "100%";
+        }
+
+        let apprId = `${data.id}` + '1';
+        
+        // let img_path = data.vend_photo;
+        // let img_path = `http://localhost:7000/${data._photo}`;
+
+        apiDetail.innerHTML = "<div class='tempVenChild' >" 
+                                + "<p>" + data.complaint_subject + "</p>" 
+
+                                + "<h4>" + "Details" + "</h4>"
+                                + "<p>" + "<strong>" + "Date: " + "</strong>" + data.created_at
+                               
+                                + "<div style='padding: 15px; margin-left: 10px;'>" + data.complaint_detail + "</div>" 
+                                + "<strong>" + "Customer Email: " +"</strong>" + `${data.customer_email}` + "</br>" 
+                                + "<strong>" + "Courier Name: " +"</strong>" + `${data.courier_involved}` + "</br>" 
+                                + "<div class='venAction' >" 
+                                + "<labe>" + "<strong>" + "Check, if Resolved " + "</strong>" + "</label>" 
+                                + `<input id=${apprId} class='btn' ${data.is_resolved?'checked': ''} type='checkbox'/>` 
+                                + "<br/>" + "<strong>" + "Customer Response: " + "</strong>" + `<span style="color: ${data.is_satisfied?"green":"red"}">` + (data.is_satisfied ? "Satisfied" : "Not Satisfied") + "</span>"                              
+                                +  "</div>" +
+                                "</div>";
+                
+                let approv = document.getElementById(apprId);
+                approv.addEventListener('change', () => {
+                    let updateData = {
+                        "is_resolved": approv.checked,
+                        "updated_at": new Date().toISOString()
+                    }
+                    let apiUrl = `http://localhost:7000/parcel_backends/update_complain/${data.id}/`;
+                    let apiOperation = useFetch(apiUrl, "PATCH", updateData);
+                    apiOperation.then((res) => {
+                        if(res.status === "success") {
+                           customAlertHandler("alert-success", res.data);
+                        } else {
+                           customAlertHandler("alert-danger", res.data);
+                        }
+                    }).catch((err) => {
+                        customAlertHandler("alert-danger", err.message);   
+                    });                    
+                }, false);
+               
+    });
+
+}
+
+//Complaint Manager ends here
+
+
+
 couriers.addEventListener('click', () =>{
     let data = useFetch('/parcel_backends/get_cour/', 'GET');
     data.then((res)=> {
@@ -637,6 +684,25 @@ vendors.addEventListener('click', () =>{
 // getCourier.addEventListener('click', () => {
 //     alert('clicked');
 // });
+
+complaints.addEventListener('click', () => {
+    let data = useFetch('/parcel_backends/get_all_complain/', 'GET');
+    data.then((res)=> {
+        let filteredData = res.data.filter((data) => data.is_satisfied === false);
+        apiContent.innerHTML = "";
+        apiContent.innerHTML = filteredData.length > 1 ? ("<p class='apiHeading' >" + filteredData.length + "  " + "complaints are available" + "</p>") :
+        ("<p class='apiHeading' >" + filteredData.length + "  " + "complaint is available" + "</p>");
+        filteredData.forEach((complaint) => {
+            apiContent.innerHTML += "<div class='alert p-vend-item'>"
+                + "<p>" + complaint.complaint_subject + "</p>" + "<p>" + complaint.courier_involved 
+                + "</p>" + `<p style="color: ${complaint.is_resolved? 'green': 'red'}">` + "Status: " + `${complaint.is_resolved ? "Resolved" : "Pending"}` + "</p>" + `<button id=${complaint.id} class="btn">`  + "View Details" 
+                + "</button>" + "</div>";
+            })
+           filteredData.forEach((complaint) =>{
+            complaintManager(`${complaint.id}`, complaint);
+           }); 
+        });
+}, false);
 
 let reset = document.getElementById('reset');
 reset.addEventListener('click', ()=> {
