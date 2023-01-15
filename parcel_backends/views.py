@@ -46,7 +46,7 @@ def base(request):
     return render(request, "parcel_backends\\base.html")
 
 
-def super_admin(request):
+def super_admin(request, *args, **kwargs):
     if request.method == 'POST':
         form_input = request.POST
         super_email = form_input['email']
