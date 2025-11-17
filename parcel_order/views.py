@@ -10,8 +10,6 @@ from datetime import date, timedelta
 import datetime
 
 
-# Create your views here.
-
 def order(request):
     return render(request, "parcel_order\\order.html")
 
